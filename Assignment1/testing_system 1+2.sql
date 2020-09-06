@@ -12,18 +12,18 @@ DepartmentName	varchar (50) not null
 -- create table: Position	
 Create table Position (
 PositionID		tinyint unsigned primary key,
-PositionName	Enum ('Dev', 'Test', 'Scrum Master', 'PM') not null
-),
+PositionName	Enum('Dev', 'Test', 'Scrum Master', 'PM') NOT NULL
+);
 
 -- create table: Account
 Create Table `Account` (
 AccountID		tinyint unsigned primary key,
-Email			varchar (50) not ,
+Email			varchar (50) not null,
 Username		varchar (50) not null,
 Fullname		varchar (50) not null,
 DepartmentID	tinyint unsigned,
 PositionID		tinyint unsigned,
-CreateDate		Date,
+CreateDate		Date CHECK(CreateDate >='1995-01-01'),
 Foreign key	(DepartmentID) references Department (DepartmentID),
 Foreign key	(PositionID) references Position (PositionID)
 );
@@ -38,7 +38,7 @@ CreateDate		Date
 
 -- create table: GroupAccount
 Create Table GroupAccount (
-GroupID			tinyint unsigned primary key,
+GroupID			tinyint unsigned,
 AccountID		tinyint unsigned,
 CreateDate		Date,
 primary key (GroupID, AccountID),
@@ -62,7 +62,7 @@ CategoryName	varchar (50) not null
 Create Table Question (
 QuestionID		tinyint unsigned primary key,
 Content			varchar (50),
-CategoryID		varchar (50),
+CategoryID		tinyint unsigned,
 TypeID			tinyint unsigned,
 CreatorID		Smallint unsigned,
 CreateDate		Date,
@@ -96,5 +96,5 @@ Create Table ExamQuestion (
 ExamID			tinyint unsigned,
 QuestionID		tinyint unsigned,
 primary key (ExamID, QuestionID),
-Foreign key	(ExamID) references ExamQuestion (ExamID)
+Foreign key	(ExamID) references Exam (ExamID)
 );
