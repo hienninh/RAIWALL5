@@ -1,6 +1,7 @@
 
 /*============================== INSERT DATABASE =======================================*/
 /*======================================================================================*/
+USE	TESTING_SYSTEM_ASSIGNMENT_1;
 -- Add data Department
 INSERT INTO Department	(DEPARTMENT_NAME) 
 VALUES					(N'Marketing'	),
@@ -45,21 +46,21 @@ VALUES 				(N'Testing System'		,5			,'2019-03-05'),
                     (N'VTI Creator'			,5			,'2020-04-06'),
                     (N'VTI Marketing 01'	,7			,'2020-04-07'),
                     (N'Management'			,8			,'2020-04-08'),
-                    (N'VTI Sale 03'		,9			,'2020-04-09'),
+                    (N'VTI Sale 03'			,9			,'2020-04-09'),
                     (N'Vi Ti Ai'			,10			,'2020-04-10');
 
 -- Add data GroupAccount
 INSERT INTO `GroupAccount`	(  Group_ID		,Account_ID	,CREATE_DATE	 )
 VALUES 						(	1		   	,1			,'2019-03-05'),
 							(	4		   	,2			,'2020-03-07'),
-							(	3		   	,3			,'2020-03-09'),
-							(	3		   	,4			,'2020-03-10'),
+							(	1		   	,3			,'2020-03-09'),
+							(	1		   	,4			,'2020-03-10'),
 							(	5		   	,5			,'2020-03-28'),
 							(	4		   	,3			,'2020-04-06'),
 							(	1		   	,7			,'2020-04-07'),
 							(	8		   	,3			,'2020-04-08'),
 							(	1		   	,9			,'2020-04-09'),
-							(	4		   	,10			,'2020-04-10');
+							(	1		   	,10			,'2020-04-10');
 
 
 -- Add data TypeQuestion
@@ -84,13 +85,13 @@ VALUES 								('Java'			),
 -- Add data Question
 INSERT INTO Question	(Content			, Category_ID	, Type_ID		, Creator_ID	,Create_Date )
 VALUES 					(N'Câu hỏi về Java'	,	1		   	,'1'			,1		         ,'2020-04-05'),
-						(N'Câu Hỏi về PHP'	,	10		   	,'2'			,2		         ,'2020-04-05'),
-						(N'Hỏi về C#'		,	9		   	,'2'			,3		         ,'2020-04-06'),
+						(N'Câu Hỏi về PHP'	,	9		   	,'2'			,2		         ,'2020-04-05'),
+						(N'Hỏi về C#'		,	9		   	,'2'			,1		         ,'2020-04-06'),
 						(N'Hỏi về Ruby'		,	6		   	,'1'			,4		         ,'2020-04-06'),
-						(N'Hỏi về Postman'	,	5		   	,'1'			,5		         ,'2020-04-06'),
+						(N'Hỏi về Postman'	,	1		   	,'1'			,1		         ,'2020-04-06'),
 						(N'Hỏi về ADO.NET'	,	3		   	,'2'			,6		         ,'2020-04-06'),
 						(N'Hỏi về ASP.NET'	,	2		   	,'1'			,7		         ,'2020-04-06'),
-						(N'Hỏi về C++'		,	8		   	,'1'			,8		         ,'2020-04-07'),
+						(N'Hỏi về C++'		,	8		   	,'1'			,10		         ,'2020-04-07'),
 						(N'Hỏi về SQL'		,	4		   	,'2'			,9		         ,'2020-04-07'),
 						(N'Hỏi về Python'	,	7		   	,'1'			,10		         ,'2020-04-07');
 
@@ -109,7 +110,7 @@ VALUES 				(N'Trả lời 01'	,1				,0		),
 	
 -- Add data Exam
 INSERT INTO Exam	(`Code`			, Title					,Category_ID	,Duration	,Creator_ID		,Create_Date )
-VALUES 				('VTIQ001'		, N'Đề thi C#'			,1				,'90'			,5			,NULL),
+VALUES 				('VTIQ001'		, N'Đề thi C#'			,1				,'90'			,5			,'2019-04-10'),
 					('VTIQ002'		, N'Đề thi PHP'			,10				,'60'			,1			,'2019-04-05'),
                     ('VTIQ003'		, N'Đề thi C++'			,9				,'120'			,2			,'2019-04-07'),
                     ('VTIQ004'		, N'Đề thi Java'		,6				,'60'			,3			,'2020-04-08'),
@@ -122,14 +123,14 @@ VALUES 				('VTIQ001'		, N'Đề thi C#'			,1				,'90'			,5			,NULL),
                     
                     
 -- Add data ExamQuestion
-INSERT INTO ExamQuestion(ExamID	,QuestionID) 
-VALUES 					(1		,5		),
-						(2		,10		), 
-						(3		,4		), 
-						(4		,3		), 
-						(5		,7		), 
-						(6		,10		), 
-						(7		,2		), 
-						(8		,10		), 
-						(9		,9		), 
-						(10		,8		); 
+INSERT INTO ExamQuestion(EXAM_ID	,QUESTION_ID) 
+VALUES 					(1			,5	),
+						(2			,10	), 
+						(3			,4	), 
+						(4			,3	), 
+						(5			,7	), 
+						(6			,10	), 
+						(7			,2	), 
+						(8			,10	), 
+						(9			,9	), 
+						(10			,8	); 

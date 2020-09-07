@@ -28,9 +28,19 @@ From `group`
 WHERE CREATE_DATE < '2019-12-20';
 
 -- Question 7: Lấy ra ID của question có >= 4 câu trả lời
-SELECT *
-From question;
+SELECT 		count(ANSWER_ID)
+From		answer
+group by	QUESTION_ID;
 
+SELECT 		Question_ID, count(ANSWER_ID) AS So_Luong
+From		answer
+group by	QUESTION_ID
+HAVING		count(ANSWER_ID) >= 4;
+
+SELECT 		Question_ID, GROUP_CONCAT(ANSWER_ID SEPARATOR ':') AS So_Luong
+From		answer
+group by	QUESTION_ID
+HAVING		count(ANSWER_ID) >= 4;
 -- Question 8: Lấy ra các ACCOUNT_ID co ten bat dau bang chu "N" và được tạo trước ngày 01/04/2020
 SELECT	*
 From 	`Account`
@@ -53,11 +63,16 @@ WHERE DEPARTMENT_ID = 2;
 SELECT *
 From `account`
 WHERE FULL_NAME like	('D%O');
+
 -- Question 12: Xóa tất cả các Group được tạo trước ngày 20/12/2019
+SELECT 	*
+FROM	question
+WHERE	CREATE_DATE < '2019-12-20';
 
 -- Question 13: Xóa tất cả các question có nội dung bắt đầu bằng từ "câu hỏi"
--- Question 14: Update thông tin của account có id = 5 thành tên "Nguyễn Bá Lộc" và email thành loc.nguyenba@vti.com.vn
 
+
+-- Question 14: Update thông tin của account có id = 5 thành tên "Nguyễn Bá Lộc" và email thành loc.nguyenba@vti.com.vn
 update	`account`
 SET		FULL_NAME = N'Nguyễn Bá Lộc',
 		Email = 'loc.nguyenba@vti.com.vn'
