@@ -31,9 +31,9 @@ LEFT JOIN	question Q ON	EQ.question_ID = Q.QUESTION_ID
 GROUP BY	EQ.question_ID
 HAVING		count(EQ.exam_ID) = (SELECT	Max(So_luong_Exam)	
 								From (SELECT Count(EQ.Exam_ID) AS So_luong_Exam
-									FROM	Examquestion EQ
-								LEFT JOIN	question Q ON	EQ.question_ID = Q.QUESTION_ID
-                                GROUP BY	EQ.Question_ID) As Max_Exam);
+										FROM	Examquestion EQ
+										LEFT JOIN	question Q ON	EQ.question_ID = Q.QUESTION_ID
+										GROUP BY	EQ.Question_ID) As Max_Exam);
 
 -- Hoac
 SELECT 		Q.Question_ID -- , COUNT(EQ.ExamID), GROUP_CONCAT(EQ.ExamID)
@@ -43,7 +43,7 @@ GROUP BY	Q.Question_ID
 HAVING 		COUNT(EQ.Exam_ID) = (SELECT Max(So_Luong_Exam) 
 								FROM ( SELECT 		COUNT(EQ.Exam_ID) AS So_Luong_Exam
 										FROM 		Question Q
-			LEFT JOIN	examquestion EQ ON EQ.Question_ID = Q.Question_ID
+										LEFT JOIN	examquestion EQ ON EQ.Question_ID = Q.Question_ID
 										GROUP BY	Q.Question_ID) AS statistic_Question_Exam);
                                         
 -- Question 6: Thông kê mỗi category Question được sử dụng trong bao nhiêu Question
@@ -94,34 +94,25 @@ JOIN	Position P ON	A.POSITION_ID	=	P.POSITION_ID
 GROUP BY	P.POSITION_ID) AS SL_Account_Min);
 
 -- Question 11: Thống kê mỗi phòng ban có bao nhiêu dev, test, scrum master, PM ( CHUA XONG)
-SELECT		*
+--  Cross Join
+SELECT		* -- POSITION_NAME, GROUP_CONCAT (A.FULL_NAME), count(A.ACCOUNT_ID)
 FROM		`Account` A
-JOIN	Position P ON	A.POSITION_ID	=	P.POSITION_ID
-JOIN	Department D ON	A.Department_ID	=	D.Department_ID;
-
+JOIN		Position P ON	A.POSITION_ID	=	P.POSITION_ID
+JOIN		Department D ON	A.Department_ID	=	D.Department_ID
+Group By	P.POSITION_NAME;
 -- Question 12: Lấy thông tin chi tiết của câu hỏi bao gồm:
--- thông tin cơ bản của question
-SELECT		*
-FROM		Question;
-
--- loại câu hỏi
-SELECT		*
+-- thông tin cơ bản của question, loại câu hỏi, ai là người tạo ra câu hỏi
+SELECT		* -- TQ.TYPE_ID, Q.QUESTION_ID, Q.CONTENT, A.ACCOUNT_ID, A.FULL_NAME, 
 FROM		Question Q
 JOIN		Typequestion TQ ON	Q.TYPE_ID	=	TQ.TYPE_ID
-GROUP BY	Q.Question_ID;
-
--- ai là người tạo ra câu hỏi
-SELECT		Q.QUESTION_ID, Q.CONTENT, A.ACCOUNT_ID
-FROM		Question Q
-RIGHT JOIN	`Account` A ON	A.ACCOUNT_ID	=	Q.CREATOR_ID
-GROUP BY	Q.Question_ID;
+RIGHT JOIN	`Account` A ON	A.ACCOUNT_ID	=	Q.CREATOR_ID;
 
 -- câu trả lời là gì
 SELECT		*
 FROM		Answer AN
 -- LEFT JOIN Question Q ON	AN.QUESTION_ID	=	Q.QUESTION_ID
 GROUP BY	AN.QUESTION_ID;
--- Question 13: Lấy ra số lượng câu hỏi của mỗi loại tự luận hay trắc nghiệm
+-- Question 13: Lấy ra số lượng câu hỏi của mỗi loại tự luận hay trắc nghiệm ( su dung left join hoac right join)
 SELECT		Q.TYPE_ID, CONTENT, count(Q.QUESTION_ID), GROUP_CONCAT(Q.QUESTION_ID)
 FROM		Question Q
 -- JOIN	Typequestion T ON	Q.TYPE_ID	=	T.TYPE_ID

@@ -87,13 +87,13 @@ INSERT INTO Question	(Content			, Category_ID	, Type_ID		, Creator_ID	,Create_Da
 VALUES 					(N'Câu hỏi về Java'	,	1		   	,'1'			,1		         ,'2020-04-05'),
 						(N'Câu Hỏi về PHP'	,	9		   	,'2'			,2		         ,'2020-04-05'),
 						(N'Hỏi về C#'		,	9		   	,'2'			,1		         ,'2020-04-06'),
-						(N'Hỏi về Ruby'		,	6		   	,'1'			,4		         ,'2020-04-06'),
+						(N'Hỏi về Ruby'		,	6		   	,'1'			,3		         ,'2020-04-06'),
 						(N'Hỏi về Postman'	,	1		   	,'1'			,1		         ,'2020-04-06'),
 						(N'Hỏi về ADO.NET'	,	3		   	,'2'			,6		         ,'2020-04-06'),
 						(N'Hỏi về ASP.NET'	,	2		   	,'1'			,7		         ,'2020-04-06'),
-						(N'Hỏi về C++'		,	8		   	,'1'			,10		         ,'2020-04-07'),
+						(N'Hỏi về C++'		,	8		   	,'1'			,5		         ,'2020-04-07'),
 						(N'Hỏi về SQL'		,	4		   	,'2'			,9		         ,'2020-04-07'),
-						(N'Hỏi về Python'	,	7		   	,'1'			,10		         ,'2020-04-07');
+						(N'Hỏi về Python'	,	7		   	,'1'			,5	         	 ,'2020-04-07');
 
 -- Add data Answers
 INSERT INTO Answer	(Content		,Question_ID	,isCorrect)
