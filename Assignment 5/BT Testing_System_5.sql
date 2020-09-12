@@ -61,6 +61,12 @@ WITH Long_Cotent_length AS
 	SELECT	*
 	FROM	Long_Cotent_length;
 
+DELETE
+FROM	Answer
+WHERE	Question_ID IN (SELECT	Question_ID
+						FROM	Long_Cotent_length);
+
+
 -- Question 4: Tạo view có chứa danh sách các phòng ban có nhiều nhân viên nhất
 DROP VIEW IF EXISTS	Table_Account_Department;
 -- Su dung CTE 

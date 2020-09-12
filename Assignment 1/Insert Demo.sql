@@ -13,7 +13,7 @@ VALUES					(N'Marketing'	),
 						(N'Phó giám đốc'),
 						(N'Giám đốc'	),
 						(N'Thư kí'		),
-						(N'Bán hàng'	);
+						(N'Phòng chờ'	);
 						
                         
 -- Add data position     
@@ -84,23 +84,23 @@ VALUES 								('Java'			),
 													
 -- Add data Question
 INSERT INTO Question	(Content			, Category_ID	, Type_ID		, Creator_ID	,Create_Date )
-VALUES 					(N'Câu hỏi về Java'	,	1		   	,'1'			,1		         ,'2020-04-05'),
-						(N'Câu Hỏi về PHP'	,	9		   	,'2'			,2		         ,'2020-04-05'),
-						(N'Hỏi về C#'		,	9		   	,'2'			,1		         ,'2020-04-06'),
-						(N'Hỏi về Ruby'		,	6		   	,'1'			,3		         ,'2020-04-06'),
-						(N'Hỏi về Postman'	,	1		   	,'1'			,1		         ,'2020-04-06'),
+VALUES 					(N'Câu hỏi về Java'	,	1		   	,'1'			,1		         ,'2018-04-05'),
+						(N'Câu Hỏi về PHP'	,	9		   	,'2'			,2		         ,'2017-04-05'),
+						(N'Hỏi về C#'		,	9		   	,'2'			,1		         ,'2020-09-10'),
+						(N'Hỏi về Ruby'		,	6		   	,'1'			,3		         ,'2018-04-06'),
+						(N'Hỏi về Postman'	,	1		   	,'1'			,1		         ,'2019-09-06'),
 						(N'Hỏi về ADO.NET'	,	3		   	,'2'			,6		         ,'2020-04-06'),
-						(N'Hỏi về ASP.NET'	,	2		   	,'1'			,7		         ,'2020-04-06'),
-						(N'Hỏi về C++'		,	8		   	,'1'			,5		         ,'2020-04-07'),
+						(N'Hỏi về ASP.NET'	,	2		   	,'1'			,7		         ,'2019-09-06'),
+						(N'Hỏi về C++'		,	8		   	,'1'			,5		         ,'2020-08-07'),
 						(N'Hỏi về SQL'		,	4		   	,'2'			,9		         ,'2020-04-07'),
-						(N'Hỏi về Python'	,	7		   	,'1'			,5	         	 ,'2020-04-07');
+						(N'Hỏi về Python'	,	7		   	,'1'			,5	         	 ,'2020-01-07');
 
 -- Add data Answers
 INSERT INTO Answer	(Content		,Question_ID	,isCorrect)
 VALUES 				(N'Trả lời 01'	,1				,0		),
-					(N'Trả lời 02'	,1				,1		),
-                    (N'Trả lời 03'	,1				,0		),
-                    (N'Trả lời 04'	,1				,1		),
+					(N'Trả lời 02'	,3				,1		),
+                    (N'Trả lời 03'	,10				,0		),
+                    (N'Trả lời 04'	,9				,1		),
                     (N'Trả lời 05'	,2				,1		),
                     (N'Trả lời 06'	,3				,1		),
                     (N'Trả lời 07'	,4				,0		),
@@ -115,10 +115,10 @@ VALUES 				('VTIQ001'		, N'Đề thi C#'			,1				,'90'			,5			,'2019-04-10'),
                     ('VTIQ003'		, N'Đề thi C++'			,9				,'120'			,2			,'2019-04-07'),
                     ('VTIQ004'		, N'Đề thi Java'		,6				,'60'			,3			,'2020-04-08'),
                     ('VTIQ005'		, N'Đề thi Ruby'		,5				,'120'			,4			,'2020-04-10'),
-                    ('VTIQ006'		, N'Đề thi Postman'		,3				,'60'			,6			,'2020-04-05'),
+                    ('VTIQ006'		, N'Đề thi Postman'		,3				,'60'			,6			,'2016-04-05'),
                     ('VTIQ007'		, N'Đề thi SQL'			,2				,'60'			,7			,'2020-04-05'),
-                    ('VTIQ008'		, N'Đề thi Python'		,8				,'60'			,8			,'2020-04-07'),
-                    ('VTIQ009'		, N'Đề thi ADO.NET'		,4				,'90'			,9			,'2020-04-07'),
+                    ('VTIQ008'		, N'Đề thi Python'		,8				,'60'			,8			,'2017-04-07'),
+                    ('VTIQ009'		, N'Đề thi ADO.NET'		,4				,'90'			,9			,'2016-04-07'),
                     ('VTIQ010'		, N'Đề thi ASP.NET'		,7				,'90'			,10			,'2020-04-08');
                     
                     

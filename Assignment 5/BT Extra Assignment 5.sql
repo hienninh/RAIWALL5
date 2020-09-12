@@ -6,21 +6,31 @@ DROP DATABASE IF EXISTS	adventureworks;
 USE	adventureworks;
 SELECT	P.`Name`
 FROM	Product P
-WHERE	P.ProductSubcategoryID = (SELECT	ProductSubcategoryID
+WHERE	P.ProductSubcategoryID IN (SELECT	ProductSubcategoryID
 									FROM	Productsubcategory	PS
 									WHERE	PS.`Name` = 'Saddles');
+-- Su dung CTE
+With ProductSubcategory_Name_Saddles AS
+(SELECT	ProductSubcategoryID
+FROM	Productsubcategory	PS
+WHERE	PS.`Name` = 'Saddles')
+SELECT	*
+FROM	ProductSubcategory_Name_Saddles;
 
 -- Question 2: Thay đổi câu Query 1 để lấy được kết quả sau
 -- Viết 1 query lấy thông tin "Name" từ bảng Production.Product có name của ProductSubcategory chứa 'Bo'
+-- Cach 1:
 SELECT	P.`Name`
 FROM	Product P
 WHERE	P.ProductSubcategoryID IN (SELECT	ProductSubcategoryID
 									FROM	Productsubcategory	PS
 									WHERE	PS.`Name` Like '%Bo%');
-                                    
+-- Cach 2: Su dung Join
+
 -- Question 3: Viết câu query trả về tất cả các sản phẩm có giá rẻ nhất (lowest ListPrice) và 
 -- Touring Bike (nghĩa là ProductSubcategoryID = 3)
-
+-- Cach 1: CTE
+-- Cach 2: Subsquer
 SELECT		* -- P.ListPrice, Count(P.ListPrice) ,P.ProductSubcategoryID, P.`Name` 
 From		Product P
 JOIN		Productsubcategory PS ON	PS.ProductSubcategoryID = P.ProductSubcategoryID
