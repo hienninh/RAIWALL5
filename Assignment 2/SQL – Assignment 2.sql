@@ -2,7 +2,7 @@
 DROP DATABASE IF EXISTS Table_Trainee;
 CREATE DATABASE Table_Trainee;
 USE Table_Trainee;
-
+-- Question 1: Tạo table với các ràng buộc và kiểu dữ liệu
 -- CREATE TABLE: Trainee
 CREATE TABLE Trainee (
 TraineeID			TINYINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -15,7 +15,11 @@ ET_English			TINYINT UNSIGNED CHECK(ET_English<=20),
 Training_Class		CHAR (10) NOT NULL,
 Evaluation_Notes	NVARCHAR (500)
 );
+-- Question 2: thêm trường VTI_Account với điều kiện not null & unique
+-- Chú ý: chú tới tới các best practice
 
+ALTER TABLE Trainee
+ADD VTI_Account VARCHAR (20) AFTER TraineeID;
 
 -- QUESTION 2:  Data Types
 CREATE TABLE `Data Types` (
@@ -27,13 +31,14 @@ ModifiedDate 		DATETIME DEFAULT NOW()		-- Thời gian của lần sửa đổi c
 
 -- CREATE TABLE: Data Types (2)
 CREATE TABLE `Data Types (2)` (
-ID					TINYINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-`Name`				VARCHAR (20) CHECK (LENGTH(`Name`)>=6),
-BirthDate			CHAR (8) CHECK (BirthDate>=2000 AND BirthDate<=1970),
-Gender				BIT NULL,
-`Code`				CHAR (5),
-IsDeletedFlag		BIT
+    ID TINYINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    `Name` VARCHAR(20) CHECK (LENGTH(`Name`) >= 6),
+    BirthDate CHAR(8) CHECK (BirthDate >= 2000 AND BirthDate <= 1970),
+    Gender BIT NULL,
+    `Code` CHAR(5),
+    IsDeletedFlag BIT
 );
+
 
 /*============================== INSERT DATABASE =======================================*/
 /*======================================================================================*/

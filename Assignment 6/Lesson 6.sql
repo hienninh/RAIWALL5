@@ -48,3 +48,28 @@ DELIMITER ;
 -- Use
 SELECT	Find_Account_ID('cocoduongqua');
 
+
+--  Question 4: Tạo Functions để trả ra id của type question có nhiều câu hỏi nhất
+SET GLOBAL log_bin_trust_function_creators = 1;
+DROP FUNCTION IF EXISTS Type_have_Max_Question;
+DELIMITER $$
+CREATE FUNCTION	Type_have_Max_Question () RETURNS TINYINT UNSIGNED
+BEGIN
+DECLARE		V_Type_ID TINYINT UNSIGNED;
+SELECT		Type_ID INTO V_Type_ID
+FROM		Question Q
+GROUP BY	Q.TYPE_ID
+HAVING		Count(QUESTION_ID) = (SELECT Max(X) FROM (SELECT 	Count(Q1.QUESTION_ID) AS X
+													FROM 		Question Q1
+													GROUP BY	Q1.TYPE_ID) AS Question_Max);
+RETURN	V_Type_ID;
+END$$
+DELIMITER ;
+
+SELECT	Type_have_Max_Question ();
+
+-- Question 12: Viết FUNCTIONS để in ra mỗi tháng có bao nhiêu câu hỏi được tạo trong năm nay
+
+SELECT	DATE_ADD('2020-09-18' ,interval(10) day);
+SELECT	DATE_ADD('2020-09-18' ,interval(-10) day) 
+-- 

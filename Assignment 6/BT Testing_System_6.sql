@@ -4,17 +4,17 @@ DROP DATABASE IF EXISTS TESTING_SYSTEM_ASSIGNMENT_1;
 USE	TESTING_SYSTEM_ASSIGNMENT_1;
 
 -- Question 1: Tạo store để người dùng nhập vào tên phòng ban và in ra tất cả các account thuộc phòng ban đó
-DROP PROCEDURE IF EXISTS	Account_of_A_Department;
-DeLimiter $$
-CREATE	PROCEDURE	Get_Account_by_Department_Name (IN IN_Department_Name VARCHAR(20))
+DROP PROCEDURE IF EXISTS Account_Of_Department;
+DELIMITER $$
+CREATE	PROCEDURE Account_Of_Department (IN in_Department_Name VARCHAR(20))
 BEGIN
-SELECT	D.DEPARTMENT_ID, D.DEPARTMENT_NAME, A.FULL_NAME
-From	`Account`	A
-JOIN	Department	D ON	A.DEPARTMENT_ID = D.DEPARTMENT_ID
-WHERE	D.Department_Name = IN_Department_Name;
+SELECT *
+FROM	`Account` A
+JOIN	Department D ON A.Department_ID = D.Department_ID
+WHERE	D.Department_Name = in_Department_Name;
 END$$
-DeLimiter ;
-Call	Account_of_A_Department (6);
+DELIMITER ;
+call Account_Of_Department('sale');
 
 -- Question 2: Tạo store để in ra số lượng account trong mỗi group
 DROP	PROCEDURE	IF EXISTS Count_Account_of_Group;
@@ -37,14 +37,12 @@ BEGIN
 SELECT	TQ.TYPE_ID, TYPE_NAME,  CREATE_DATE,Count(QUESTION_ID), Group_Concat(Q.CONTENT)
 FROM	Question Q
 JOIN	Typequestion TQ	ON Q.TYPE_ID = TQ.TYPE_ID
-WHERE	MONTH (CREATE_DATE) = month(NOW())
-GROUP BY MONTH (CREATE_DATE);
+WHERE	MONTH (CREATE_DATE) = month(NOW());
 END$$;
 DELIMITER $$
 Call	Type_Question_Of_Month ()	
 
 SELECT * From	Question
--- Tai sao phai lenh where roi moi Group by
 
 --  Question 4: Tạo store để trả ra id của type question có nhiều câu hỏi nhất
 -- Su dung OUT
@@ -72,23 +70,20 @@ DeLimiter $$
 CREATE	PROCEDURE Tyde_Have_Max_Count_Question ()
 BEGIN
 With	Max_Count_Question_Of_Tyde AS
-(Select	Count(QUESTION_ID)
+(SELECT		TQ.TYPE_ID, TYPE_NAME,  CREATE_DATE,Count(QUESTION_ID) AS So_luong, Group_Concat(Q.CONTENT)
 FROM		Question Q
 JOIN		Typequestion TQ	ON Q.TYPE_ID = TQ.TYPE_ID
 GROUP BY	Q.TYPE_ID
 LIMIT 		1)
-SELECT		TQ.TYPE_ID, TYPE_NAME,  CREATE_DATE,Count(QUESTION_ID), Group_Concat(Q.CONTENT)
-FROM		Question Q
-JOIN		Typequestion TQ	ON Q.TYPE_ID = TQ.TYPE_ID
-GROUP BY	Q.TYPE_ID
-HAVING		Count(QUESTION_ID) = (Select * FROM	Max_Count_Question_Of_Tyde);
+SELECT		*
+FROM		Max_Count_Question_Of_Tyde;
 END$$
 DeLimiter ;
 Call	Tyde_Have_Max_Count_Question();	
 -- Question 5: Sử dụng store ở question 4 để tìm ra tên của type question
 SELECT *
-FROM	Typequestion TQ
-WHERE	TQ.TYPE_ID = @V_TYPE_ID;
+FROM	Typequestion
+WHERE	TYPE_ID = @V_TYPE_ID;
 
 -- Question 6: Viết 1 store cho phép người dùng nhập vào 1 chuỗi và trả về group có tên chứa chuỗi của người dùng nhập vào 
 -- hoặc trả về user có username chứa chuỗi của người dùng nhập vào
@@ -101,6 +96,23 @@ FROM	`Group`
 WHERE	GROUP_NAME  LIKE CONCAT('%',Input_String, '%');
 
 SELECT 	USER_NAME
+FROM	`Account`
+WHERE	USER_NAME LIKE	CONCAT('%',Input_String, '%');
+END$$;
+DELIMITER ;
+
+CALL get_Infomation_of_Name('a');
+-- cach 2
+
+DROP PROCEDURE IF EXISTS	get_Infomation_of_Name;
+DELIMITER $$
+CREATE	PROCEDURE	get_Infomation_of_Name (IN Input_String Varchar(50))
+BEGIN
+SELECT	GROUP_NAME, Null AS USER_NAME
+FROM	`Group`
+WHERE	GROUP_NAME  LIKE CONCAT('%',Input_String, '%')
+UNION
+SELECT 	Null AS GROUP_NAME, USER_NAME
 FROM	`Account`
 WHERE	USER_NAME LIKE	CONCAT('%',Input_String, '%');
 END$$;
@@ -216,7 +228,7 @@ BEGIN
 WITH	Question_MONTH AS
 (SELECT 	QUESTION_ID, Count(QUESTION_ID),CREATE_DATE , GROUP_CONCAT(CONTENT), Month(CREATE_DATE)
 FROM		Question
-WHERE		YEAR (CREATE_DATE) = 2020
+WHERE		YEAR (CREATE_DATE) = year(NOW())
 GROUP BY	MONTH(CREATE_DATE))
 
 SELECT *
@@ -226,6 +238,31 @@ END$$
 DELIMITER ;
 -- USE
 Call Question_of_Month(4);
+-- Cách 2: Tối ưu hơn
+DROP PROCEDURE	IF EXISTS Question_of_month;
+DELIMITER $$
+CREATE	PROCEDURE	Question_of_month ()
+BEGIN
+SELECT Each_Month.Month, Count(QUESTION_ID), GROUP_CONCAT(CONTENT)
+FROM
+	(SELECT	1 AS MONTH UNION
+	SELECT	2 AS MONTH UNION
+	SELECT	3 AS MONTH UNION
+	SELECT	4 AS MONTH UNION
+	SELECT	5 AS MONTH UNION
+	SELECT	6 AS MONTH UNION
+	SELECT	7 AS MONTH UNION
+	SELECT	8 AS MONTH UNION
+	SELECT	9 AS MONTH UNION
+	SELECT	10 AS MONTH UNION
+	SELECT	11 AS MONTH UNION
+	SELECT	12 AS MONTH) AS Each_Month
+LEFT JOIN	Question ON	Each_Month.Month = Month(Create_Date)
+GROUP BY	Each_Month.Month
+ORDER BY	Each_Month.Month ASC;
+END$$
+DELIMITER ;
+CALL Question_of_month ();
 
 -- Question 13: Viết store để in ra mỗi tháng có bao nhiêu câu hỏi được tạo trong 6 tháng gần đây nhất
  -- (Nếu tháng nào không có thì sẽ in ra là "không có câu hỏi nào trong tháng")
@@ -236,7 +273,7 @@ BEGIN
 WITH	Question_MONTH AS
 (SELECT 		QUESTION_ID, Count(QUESTION_ID),CREATE_DATE , GROUP_CONCAT(CONTENT), Month(CREATE_DATE)
 FROM		Question
-WHERE		YEAR (CREATE_DATE) = 2020 AND (MONTH(NOW()) - MONTH(CREATE_DATE)) < 6
+WHERE		YEAR (CREATE_DATE) = year(NOW()) AND (MONTH(NOW()) - MONTH(CREATE_DATE)) < 6
 GROUP BY	MONTH(CREATE_DATE))
 SELECT *
 FROM	Question_MONTH
@@ -244,3 +281,32 @@ WHERE	MONTH(CREATE_DATE) = in_MONTH_CREATE_DATE;
 END$$
 DELIMITER ;
 Call Question_of_6_Month(4);
+
+-- Cách 2: Tối ưu hơn
+
+-- Select	NOW();
+-- Select	DATE_ADD(NOW() , INTERVAL (-6) Month) AS Date_6_Month;
+DROP PROCEDURE	IF EXISTS	Question_of_Six_Month;
+DELIMITER $$
+CREATE	PROCEDURE	Question_of_Six_Month ()
+BEGIN
+SELECT	Each_Month_Last6month.MONTH, Count(Question_ID), GROUP_CONCAT(CONTENT)
+FROM
+	(SELECT	MONTH(NOW() - INTERVAL 5 MONTH) AS MONTH
+	UNION	
+	SELECT	MONTH(NOW() - INTERVAL 4 MONTH) AS MONTH
+	UNION
+	SELECT	MONTH(NOW() - INTERVAL 3 MONTH) AS MONTH
+	UNION
+	SELECT	MONTH(NOW() - INTERVAL 2 MONTH) AS MONTH
+	UNION
+	SELECT	MONTH(NOW() - INTERVAL 1 MONTH) AS MONTH
+	UNION
+	SELECT	MONTH(NOW() - INTERVAL 0 MONTH) AS MONTH) 
+	AS Each_Month_Last6month
+	LEFT JOIN	Question ON Each_Month_Last6month.MONTH = MONTH(CREATE_DATE)
+    GROUP BY Each_Month_Last6month.MONTH
+	ORDER BY Each_Month_Last6month.MONTH ASC;
+    END$$
+    DELIMITER ;
+CALL	Question_of_Six_Month ();

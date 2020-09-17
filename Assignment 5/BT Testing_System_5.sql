@@ -11,18 +11,22 @@ WHERE	DEPARTMENT_NAME = 'Sale';
 
 SELECT	*
 FROM	Nhan_Vien_Sales;
+
 -- Su dung CTE
-WITH	Nhan_Vien_Sales AS
-(SELECT	D.DEPARTMENT_NAME, GROUP_CONCAT(A.FULL_NAME)
-FROM	Department D
-JOIN	`Account` A	ON	A.Department_ID = D.Department_ID
-WHERE	DEPARTMENT_NAME = 'Sale')
+WITH	DepartmentID_of_Sales AS
+(SELECT D.Department_ID 
+FROM Department D 
+WHERE D.Department_Name = 'Sale')
 
 SELECT	*
-FROM	Nhan_Vien_Sales;
+FROM	`Account` A
+WHERE	A.Department_ID = (SELECT Department_ID  
+							FROM	DepartmentID_of_Sales);
+                            
 -- Question 2: Tạo view có chứa thông tin các account tham gia vào nhiều group nhất
-DROP VIEW IF EXISTS Account_Have_Max_Group;
+
 -- Su dung VIEW
+DROP VIEW IF EXISTS Account_Have_Max_Group;
 CREATE	VIEW  Account_Have_Max_Group AS	
 SELECT		ACCOUNT_ID, Count(GA.Group_ID) AS So_Luong_Group, Group_Concat(G.GROUP_NAME)
 FROM		Groupaccount GA
@@ -51,6 +55,7 @@ Group_Account_Join	AS
 
 
 -- Question 3: Tạo view có chứa câu hỏi có những content quá dài (content quá 19 từ được coi là quá dài) và xóa nó đi
+SELECT	* FROM	Question;
 DROP View IF EXISTS Long_Cotent_length	;
 -- Su dung CTE
 WITH Long_Cotent_length AS
@@ -97,6 +102,7 @@ SELECT	*
 FROM	Department_Have_Max_Account;               
 
 -- Question 5: Tạo view có chứa tất ca các câu hỏi do user họ Nguyễn tạo
+
 -- Su dung View
 CREATE	VIEW	Question_Of_User_Nguyen AS
 SELECT			Full_Name, count(Q.CONTENT), GROUP_CONCAT(Q.CONTENT)

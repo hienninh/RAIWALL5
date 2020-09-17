@@ -13,7 +13,7 @@ VALUES					(N'Marketing'	),
 						(N'Phó giám đốc'),
 						(N'Giám đốc'	),
 						(N'Thư kí'		),
-						(N'Phòng chờ'	);
+						(N'Phong cho'	);
 						
                         
 -- Add data position     
@@ -24,29 +24,29 @@ VALUES 					('Dev'			),
                         ('PM'			);
 
 -- Add data Account
-INSERT INTO `Account`(Email								, USER_NAME			, FULL_NAME				, DEPARTMENT_ID	,POSITION_ID,CREATE_DATE)
-VALUES 				('haidang29productions@gmail.com'	, 'dangblack'		,'Nguyen Hai Dang'		,5  			,1			,NULL),
-					('account1@gmail.com'				, 'quanganh'		,'Tong Quang Anh'		,3  			,2			,'2019-10-20'),
-                    ('account2@gmail.com'				, 'vanchien'		,'Nguyen Van Chien'		,2  			,3			,'2020-03-07'),
-                    ('account3@gmail.com'				, 'cocoduongqua'	,'Duong Do'				,4  			,4			,'2020-03-08'),
-                    ('account4@gmail.com'				, 'doccocaubai'		,'Nguyen Chien Thang'	,4  			,4			,'2020-03-10'),
-                    ('dapphatchetngay@gmail.com'		, 'khabanh'			,'Ngo Ba Kha'			,6  			,3			,Null),
-                    ('songcodaoly@gmail.com'			, 'huanhoahong'		,'Bui Xuan Huan'		,7  			,2			,'2020-04-05'),
-                    ('sontungmtp@gmail.com'				, 'tungnui'			,'Nguyen Thanh Tung'	,3  			,1			,'2020-04-07'),
-                    ('duongghuu@gmail.com'				, 'duongghuu'		,'Duong Van Huu'		,4  			,2			,'2020-04-07'),
-                    ('vtiaccademy@gmail.com'			, 'vtiaccademy'		,'Vi Ti Ai'				,10 			,1			,'2020-04-09');
+INSERT INTO `Account`(Email								, USER_NAME			, FULL_NAME				, DEPARTMENT_ID	,POSITION_ID,CREATE_DATE	,GENDER	)
+VALUES 				('haidang29productions@gmail.com'	, 'dangblack'		,'Nguyen Hai Dang'		,5  			,1			,NULL	        ,'M'	),
+					('account1@gmail.com'				, 'quanganh'		,'Tong Quang Anh'		,3  			,2			,'2019-10-20'	,'M'	),
+                    ('account2@gmail.com'				, 'vanchien'		,'Nguyen Van Chien'		,2  			,3			,'2020-03-07'	,'M'	),
+                    ('account3@gmail.com'				, 'cocoduongqua'	,'Duong Do'				,4  			,4			,'2020-03-08'	,'U'	),
+                    ('account4@gmail.com'				, 'doccocaubai'		,'Nguyen Chien Thang'	,4  			,4			,'2020-03-10'	,'U'	),
+                    ('dapphatchetngay@gmail.com'		, 'khabanh'			,'Ngo Ba Kha'			,6  			,3			,Null			,'F'	),
+                    ('songcodaoly@gmail.com'			, 'huanhoahong'		,'Bui Xuan Huan'		,7  			,2			,'2020-04-05'	,'M'	),
+                    ('sontungmtp@gmail.com'				, 'tungnui'			,'Nguyen Thanh Tung'	,3  			,1			,'2020-04-07'	,'F'	),
+                    ('duongghuu@gmail.com'				, 'duongghuu'		,'Duong Van Huu'		,4  			,2			,'2020-04-07'	,'F'	),
+                    ('vtiaccademy@gmail.com'			, 'vtiaccademy'		,'Vi Ti Ai'				,10 			,1			,'2020-04-09'	,'F'	);
 
 -- Add data Group
 INSERT INTO `Group`	(  GROUP_NAME			,CREATOR_ID	,CREATE_DATE)
-VALUES 				(N'Testing System'		,5			,'2019-03-05'),
+VALUES 				(N'Testing System'		,5			,'2020-03-05'),
 					(N'Developement'		,1			,'2020-03-07'),
-                    (N'VTI Sale 02'			,2			,'2020-03-09'),
-                    (N'VTI Sale 02'			,4			,'2020-03-10'),
+                    (N'VTI Sale 02'			,2			,'2020-09-09'),
+                    (N'VTI Sale 02'			,4			,'2020-05-10'),
                     (N'VTI Sale 03'			,4			,'2020-03-28'),
                     (N'VTI Creator'			,5			,'2020-04-06'),
-                    (N'VTI Marketing 01'	,7			,'2020-04-07'),
+                    (N'VTI Marketing 01'	,7			,'2020-07-07'),
                     (N'Management'			,8			,'2020-04-08'),
-                    (N'VTI Sale 03'			,9			,'2020-04-09'),
+                    (N'VTI Sale 03'			,9			,'2020-08-09'),
                     (N'Vi Ti Ai'			,10			,'2020-04-10');
 
 -- Add data GroupAccount
@@ -54,10 +54,10 @@ INSERT INTO `GroupAccount`	(  Group_ID		,Account_ID	,CREATE_DATE	 )
 VALUES 						(	1		   	,1			,'2019-03-05'),
 							(	4		   	,2			,'2020-03-07'),
 							(	1		   	,3			,'2020-03-09'),
-							(	1		   	,4			,'2020-03-10'),
-							(	5		   	,5			,'2020-03-28'),
+							(	2		   	,4			,'2020-03-10'),
+							(	1		   	,5			,'2020-03-28'),
 							(	4		   	,3			,'2020-04-06'),
-							(	1		   	,7			,'2020-04-07'),
+							(	3		   	,7			,'2020-04-07'),
 							(	8		   	,3			,'2020-04-08'),
 							(	1		   	,9			,'2020-04-09'),
 							(	1		   	,10			,'2020-04-10');
@@ -97,16 +97,16 @@ VALUES 					(N'Câu hỏi về Java'	,	1		   	,'1'			,1		         ,'2018-04-05')
 
 -- Add data Answers
 INSERT INTO Answer	(Content		,Question_ID	,isCorrect)
-VALUES 				(N'Trả lời 01'	,1				,0		),
-					(N'Trả lời 02'	,3				,1		),
-                    (N'Trả lời 03'	,10				,0		),
-                    (N'Trả lời 04'	,9				,1		),
-                    (N'Trả lời 05'	,2				,1		),
-                    (N'Trả lời 06'	,3				,1		),
-                    (N'Trả lời 07'	,4				,0		),
-                    (N'Trả lời 08'	,8				,0		),
-                    (N'Trả lời 09'	,9				,1		),
-                    (N'Trả lời 10'	,10				,1		);
+VALUES 				(N'Trả lời 01'	,1				,'T'		),
+					(N'Trả lời 02'	,3				,'T'		),
+                    (N'Trả lời 03'	,10				,'F'		),
+                    (N'Trả lời 04'	,9				,'T'		),
+                    (N'Trả lời 05'	,2				,'F'		),
+                    (N'Trả lời 06'	,3				,'T'		),
+                    (N'Trả lời 07'	,4				,'F'		),
+                    (N'Trả lời 08'	,8				,'F'		),
+                    (N'Trả lời 09'	,9				,'T'		),
+                    (N'Trả lời 10'	,10				,'T'		);
 	
 -- Add data Exam
 INSERT INTO Exam	(`Code`			, Title					,Category_ID	,Duration	,Creator_ID		,Create_Date )
@@ -129,8 +129,8 @@ VALUES 					(1			,5	),
 						(3			,4	), 
 						(4			,3	), 
 						(5			,7	), 
-						(6			,10	), 
+						(5			,10	), 
 						(7			,2	), 
 						(8			,10	), 
-						(9			,9	), 
+						(10			,9	), 
 						(10			,8	); 
