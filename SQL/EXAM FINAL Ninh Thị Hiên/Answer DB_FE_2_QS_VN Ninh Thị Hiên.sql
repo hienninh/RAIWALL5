@@ -30,7 +30,12 @@ SELECT		J.SinhVien_ID, J.DeTai_ID, DT.DeTai_NAME
 FROM		SinhVienInfo J
 LEFT JOIN	detai DT ON	J.DeTai_ID = DT.DeTai_ID;
 
-SELECT * FROM SinhVienInfo_update;
+SELECT *,
+CASE
+WHEN Department_name is Null THEN 'Chua co'
+ELSE Department_name
+END AS phan_loai
+FROM SinhVienInfo_update;
 
 UPDATE	SinhVienInfo_update
 SET		DeTai_NAME = 'Chua co'

@@ -1,14 +1,20 @@
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Random;
 import java.util.Scanner;
 
 
 public class Test {
 
-	public static void main(String[] args) {
+	private static Scanner scanner;
+
+	public static void main(String[] args) throws ParseException {
+	
 		// Create departments
+	
 		Department department1 = new Department();
 		department1.id = 1;
 		department1.name = "Sale";
@@ -215,11 +221,40 @@ public class Test {
 
 		Question[] questionsOfExam3 = { question2, question3 };
 		exam3.questions = questionsOfExam3;
+
+		// Lesson 2
+		// Printf
+//		( Chua )Question 6:
+//		In ra thông tin account (như Question 8 phần FOREACH) theo định dạng
+//		table (giống trong Database)
+		
+//		for (Account account6 : accounts)
+//			{System.out.printf("%-30s %-50d \n", "id:" 	,account6.id);
+//			System.out.printf("%-30s %-50s \n", "email" 	,account6.email);
+//			System.out.printf("%-30s %-50s \n","fullname" ,account6.fullName);}
+//		
+
+//		Question 7: Lấy ngẫu nhiên 1 số có 3 chữ số
+//		Random randomd = new Random();
+//		int now = (int) LocalDate.now().toEpochDay();
+//		int minDay6 = (int) LocalDate.of(1970, 01, 01).toEpochDay();
+//		long randomInt6 = randomd.nextInt(now - minDay6);
+//		LocalDate randomday6 =  LocalDate.ofEpochDay(randomInt6);
+//		System.out.println(randomday6);
 	
-		String pattern1 = "yyyy";
-		SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(pattern1);
-		String dateString1 = simpleDateFormat1.format(new Date());
-		System.out.println(dateString1);
-	
+		// Question 15:
+
+		
+			
+			In_so_chan_nho_hon_20();}
+			public static void In_so_chan_nho_hon_20()
+			
+				{
+				int z = 0;
+				do {if (z % 2 == 0)
+				System.out.println(z);
+				z++ ;}
+					while (z < 20);
+				}
 	}
-}
+

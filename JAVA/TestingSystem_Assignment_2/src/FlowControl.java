@@ -1,13 +1,17 @@
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Random;
+import java.util.Scanner;
 
 public class FlowControl {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		// Create departments
 		Department department1 = new Department();
 		department1.id = 1;
@@ -533,9 +537,15 @@ public class FlowControl {
 		System.out.println();
 		
 
-//		( Chua )Question 6:
+//		Question 6:
 //		In ra thông tin account (như Question 8 phần FOREACH) theo định dạng
 //		table (giống trong Database)
+		
+
+		System.out.printf("%-30s %-50s %s \n", "id", "email", "fullname");
+		System.out.printf("%-30s %-50s %s \n",account1.id, account1.email, account1.email);
+		System.out.printf("%-30s %-50s %s \n",account2.id, account2.email, account2.email);
+		System.out.printf("%-30s %-50s %s \n",account3.id, account3.email, account3.email);
 		
 //	Exercise 3 (Optional): Date Format
 //		Question 1: In ra thông tin Exam thứ 1 và property create date sẽ được format theo định
@@ -591,19 +601,229 @@ public class FlowControl {
 		System.out.println(dateStringMd);
 
 // Exercise 4 (Optional): Random Number
+//		Question 1: In ngẫu nhiên ra 1 số nguyên
+		Random random = new Random();
+		int b = random.nextInt();
+		System.out.println(b);
+		
+//		Question 2: In ngẫu nhiên ra 1 số thực
+
+		float c = random.nextInt();
+		System.out.println(c);
+		
+//		Question 3: Khai báo 1 array bao gồm các tên của các bạn trong lớp, sau đó in ngẫu nhiên ra tên của 1 bạn
+		// 0(Min) --> length -1(Max)
+
+		int d = random.nextInt(3);
+		System.out.println(accounts[d].email);
+		
+		
+//		Question 4: Lấy ngẫu nhiên 1 ngày trong khoảng thời gian 24-07-1995 tới ngày 20-12-1995
+		
+		Random randomd = new Random();
+		 int minDay = (int) LocalDate.of(1995, 07, 24).toEpochDay();
+		 int maxDay = (int) LocalDate.of(1995, 12, 20).toEpochDay();
+		 
+		 long randomInt = minDay + randomd.nextInt(maxDay - minDay);
+		 LocalDate randomDay = LocalDate.ofEpochDay(randomInt);
+		 
+		 System.out.println(randomDay);
+		 
+//		Question 5: Lấy ngẫu nhiên 1 ngày trong khoảng thời gian 1 năm trở lại đây
+
+		// long maxday5 = (long) LocalDate.of(new Date()).toEpochDay();
+		 
+		int now = (int) LocalDate.now().toEpochDay();
+		long randomInt5 = now - randomd.nextInt(365);
+		LocalDate randomday5 =  LocalDate.ofEpochDay(randomInt5);
+		System.out.println(randomday5);
+		
+//		Question 6: Lấy ngẫu nhiên 1 ngày trong quá khứ
+		int minDay6 = (int) LocalDate.of(1970, 01, 01).toEpochDay();
+		long randomInt6 = randomd.nextInt(now - minDay6);
+		LocalDate randomday6 =  LocalDate.ofEpochDay(randomInt6);
+		System.out.println(randomday6);
+		
+		
+//		Question 7: Lấy ngẫu nhiên 1 số có 3 chữ số
+		Random random7 = new Random();
+		int e = 100 + random7.nextInt(999-100+1);
+		System.out.println(e);
+
 		
 // Exercise 5: Input from console
 //		Question 1: Viết lệnh cho phép người dùng nhập 3 số nguyên vào chương trình
+		Scanner scanner = new Scanner (System.in);
+		System.out.print("Nhap vào số nguyên: ");
+		int a1 = scanner.nextInt();
+		System.out.print("Input: "  + a1 + "\n");
+		int a2 = scanner.nextInt();
+		System.out.print("Input: "  + a2 + "\n");
+		int a3 = scanner.nextInt();
+		System.out.print("Input: "  + a3 + "\n");
 		
 //		Question 2: Viết lệnh cho phép người dùng nhập 2 số thực vào chương trình
+		
+		
+		System.out.print("Nhap vào số thực: ");
+		float f1 = scanner.nextFloat();
+		System.out.print("Input: "  + f1 + "\n");
+		float f2 = scanner.nextFloat();
+		System.out.print("Input: "  + f2 + "\n");
+		System.out.print(" Ban vua nhap vao 2 so thực:"  + f1 + " " + f2);
+		
 //		Question 3: Viết lệnh cho phép người dùng nhập họ và tên
+	
+		System.out.println("Nhap vao ho va ten");
+		String N1 = scanner.next();
+		System.out.print("Ho: "  + N1 + "\n");
+		String N2 = scanner.next();
+		System.out.print("Ten: "  + N2 + "\n");
+		System.out.println("Ho va ten cua ban la:" + N1 +" "+ N2);
+	
+
+		
 //		Question 4: Viết lệnh cho phép người dùng nhập vào ngày sinh nhật của họ
+		System.out.println("Moi nhap vao ngay sinh nhat theo dinh dang dd - MM - yyyy");
+		String dateInput = scanner.next();
+		// string ---> date
+		String pattern4 = "dd-MM-yyyy";
+		SimpleDateFormat DateFormat4 = new SimpleDateFormat(pattern4);
+		Date date4 = DateFormat4.parse(dateInput);
+		System.out.println("Ban vua nhap vao ngay sinh nhat la: " + "" + date4);
+		scanner.close();
+		
+		
 //		Question 5: Viết lệnh cho phép người dùng tạo account (viết thành method)
 //		Đối với property Position, Người dùng nhập vào 1 2 3 4 5 và vào
 //		chương trình sẽ chuyển thành Position.Dev, Position.Test,
 //		Position.ScrumMaster, Position.PM
-		// 
+		thongTinAccount();}
+	
+	public static void thongTinAccount() {
+	Scanner scanner1 = new Scanner (System.in);
+	System.out.println("Moi ban nhap so tu 1 den 4");
+	int number5 = scanner1.nextInt();
+	switch (number5) {
+	case 1:
+		System.out.println("position.DEV");
+	break;
+	
+	case 2:
+		System.out.println("Position.Test");
+	break;
+	
+	case 3:
+		System.out.println("Position.ScrumMaster");
+	break;
+	
+	case 4:
+		System.out.println("Position.PM");
+	break;}
+		
+//		
+//		Question 6: Viết lệnh cho phép người dùng tạo department (viết thành method)
+// xem lai
+		
+
+		
+//		Question 7: Nhập số chẵn từ console: mix scanner va if-else
+		System.out.println("Moi ban nhap vao 1 so chan");
+		int number = scanner1.nextInt();
+		if(number%2 ==0)
+		{System.out.println("Ban vua nhap vao so chan: " + number);}
+		else
+		{System.out.println("Ban vua nhap vao khong phai so chan");}
+		
+		
+//		Question 8: Viết chương trình thực hiện theo flow sau: (chua hieu) -- ket hop scanner va swith-case
+//			Bước 1:
+//			Chương trình in ra text "mời bạn nhập vào chức năng muốn sử
+//			dụng"
+//			Bước 2:
+//			Nếu người dùng nhập vào 1 thì sẽ thực hiện tạo account
+//			Nếu người dùng nhập vào 2 thì sẽ thực hiện chức năng tạo
+//			department
+//			Nếu người dùng nhập vào số khác thì in ra text "Mời bạn nhập
+//			lại" và quay trở lại bước 1
+		
+		while (true) {
+			System.out.println("Mời bạn nhập vào chức năng muốn sử dụng (1: tao account or 2: tao department)");
+			int methodNumber = scanner1.nextInt();
+
+			switch (methodNumber) {
+			case 1:
+				inputAccount();
+				break;
+			case 2:
+				inputDepartment();
+				break;
+			default:
+				System.out.println("Mời bạn nhập lại");
+			}
+		}
 	
 
+//		Question 9: Viết method cho phép người dùng thêm group vào account theo flow sau: (Chua)
+//			Bước 1:
+//			In ra tên các usernames của user cho người dùng xem
+//			Bước 2:
+//			Yêu cầu người dùng nhập vào username của account
+//			Bước 3:
+//			In ra tên các group cho người dùng xem
+//			Bước 4:
+//			Yêu cầu người dùng nhập vào tên của group
+//			Bước 5:
+//			Dựa vào username và tên của group người dùng vừa chọn, hãy
+//			thêm account vào group đó .
+		
+//			System.out.println("Moi nhap vao username_of_account");
+//			String username = scanner1.next();
+//			System.out.println("Ten username la :" + username);
+//			
+//			System.out.println("Moi nhap vao groupname");
+//			String groupname = scanner1.nextLine();
+//			System.out.println("Ten groupname la:" + groupname);
+//			
+			
+		
+//		Question 10: Tiếp tục Question 8 và Question 9
+//			Bổ sung thêm vào bước 2 của Question 8 như sau:
+//			Nếu người dùng nhập vào 3 thì sẽ thực hiện chức năng thêm group vào
+//			account
+//			Bổ sung thêm Bước 3 của Question 8 như sau:
+//			Sau khi người dùng thực hiện xong chức năng ở bước 2 thì in ra dòng
+//			text để hỏi người dùng "Bạn có muốn thực hiện chức năng khác
+//			không?". Nếu người dùng chọn "Có" thì quay lại bước 1, nếu người
+//			dùng chọn "Không" thì kết thúc chương trình (sử dụng lệnh return để
+//			kết thúc chương trình)
+//			Question 11: Tiếp tục Question 10
+//			Bổ sung thêm vào bước 2 của Question 8 như sau:
+//			Nếu người dùng nhập vào 4 thì sẽ thực hiện chức năng thêm account
+//			vào 1 nhóm ngẫu nhiên, chức năng sẽ được cài đặt như sau:
+//			Bước 1:
+//			In ra tên các usernames của user cho người dùng xem
+//			6
+//			Bước 2:
+//			Yêu cầu người dùng nhập vào username của account
+//			Bước 3:
+//			Sau đó chương trình sẽ chọn ngẫu nhiên 1 group
+//			Bước 4:
+//			Thêm account vào group chương trình vừa chọn ngẫu
+//			nhiên
+
+		
+	}
+
+
+	private static void inputDepartment() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void inputAccount() {
+		// TODO Auto-generated method stub
+
+	
 	}
 }
